@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="T7hZi6YPdzdd_bKbed1Hsq6xWxusKQNCGw0fshYoX4E" /> @*dealkar.pk*@
+    @*<meta name="google-site-verification" content="orv0gPJPIeitRMIAGV_0VbMTx3DfWKJa32R4E9Vrr20" />*@ @*newtemp*@
+    <link rel="icon" href="~/Images/others/favicon.png" >
+    <title>
+         @if (ViewBag.Title != null)
+        { @ViewBag.Title }
+        else
+        { <text>Classified Website @*in mobiles, laptops, vehicles, RealEstate, Jobs, Services, Electronics, Animals, Study, Entertainment, Matrimonal, Home Appliances, Business*@  </text> }
+    | dealkar.pk
+    </title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+
+
+    @RenderSection("Styles", required: false)
+    @Styles.Render("~/Content/css")
+@Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/scripts/selectizeStyles")
+  @Styles.Render("~/plugins/laddaStyles")
+    <link href="~/Content/myStyles.css" rel="stylesheet" /> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script>
+        //dealkar.pk-official
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-74635367-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body class="fixed-sidebar fixed-nav mini-navbar">
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        @Html.Partial("_Navigation")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg">
+
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
+
+            @*@Html.MvcSiteMap().Menu()*@
+
+
+
+            @*@Html.MvcSiteMap().SiteMapPath()  this one was used *@
+
+            <!-- Main view  -->
+            @RenderBody()
+
+           
+
+            @*@Html.Partial("/Views/Shared/_Chat.cshtml")*@
+            @Html.Partial("~/Views/Shared/_UserLogin.cshtml")
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+            @Html.Partial("~/Views/Search/_SearchLocation.cshtml")
+        </div>
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @*@Html.Partial("_RightSidebar")*@
+
+    </div>
+    <!-- End wrapper-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render("~/plugins/knockout")
+    @Scripts.Render("~/scripts/selectize")
+    @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/truncate")
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/app/_SearchLocation.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/app/chat.js"></script>
+    <script src="~/Scripts/UserLogin.js"></script>
+    <script src="~/Scripts/app/GetLoginUserId.js"></script>
+    @*<script src="~/Scripts/app/GoogleAnalytics.js"></script>*@
+    <script>
+        var isConnectionReady = ko.observable(false);
+        $(function () {
+            $.connection.hub.start().done(function () {
+                 isConnectionReady(true);
+            });
+        });
+    </script>
+        @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            
+            $.cookie("AWSFolderName", "Items/", { path: '/' });
+            $.cookie("AWSUserFolder", "Users/", { path: '/' });
+            $.cookie("AWSCompanyFolder", "Companies/", { path: '/' });
+            $.cookie("AWSURL", "https://s3.amazonaws.com/dealkar.pk/", { path: '/' });
+            //  $("#side-menu").css({ "display": "block" });
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                preventDuplicates: true,
+                positionClass: 'toast-top-right',
+                onclick: null
+            };
+            //$("#side-menu").css({ "display": "block" });
+        })
+        function authForFeedback() {
+            if (loginUserId() != "Visitor") {
+                window.location.href = '/Feedback-contact';
+            }
+            else {
+                loginBtn();
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>
